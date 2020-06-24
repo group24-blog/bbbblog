@@ -14,6 +14,10 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+<<<<<<< HEAD
+=======
+    "element-ui": "^2.13.2",
+>>>>>>> 608f884e1fc3563ba3f222b0b4314bdc424fc97c
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
