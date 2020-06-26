@@ -1,7 +1,8 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
   <div class="login_container">
-    <div> class="login_box"</div>
+    <div class="login_box"></div>
   </div>
+
 </template>
 
 <script>
