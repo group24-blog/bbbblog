@@ -1,41 +1,26 @@
 <template xmlns:v-on="http://www.w3.org/1999/xhtml">
-  <div>
-    用户名:<input type="text" v-model="loginForm.username" placeholder="请输入用户名"/>
-    <br><br>
-    密码： <input type="password" v-model="loginForm.password" placeholder="请输入密码"/>
-    <br><br>
-    <button v-on:click="login">登录</button>
+  <div class="login_container">
+    <div> class="login_box"</div>
   </div>
 </template>
 
 <script>
 
   export default {
-    name: 'Login',
-    data () {
-      return {
-        loginForm: {
-          username: '',
-          password: ''
-        },
-        responseResult: []
-      }
-    },
-    methods: {
-      login () {
-        this.$axios
-          .post('/login', {
-            username: this.loginForm.username,
-            password: this.loginForm.password
-          })
-          .then(successResponse => {
-            if (successResponse.data.code === 200) {
-              this.$router.replace({path: '/index'})
-            }
-          })
-          .catch(failResponse => {
-          })
-      }
-    }
+
   }
 </script>
+
+<style lang="less" scoped>
+  .login_container{
+    background-color: #2b4b6b;
+    height: 100%;
+  }
+  .login_box{
+    width: 300px;
+    height: 300px;
+    background-color: aliceblue;
+    border-radius: 3px;
+  }
+
+</style >

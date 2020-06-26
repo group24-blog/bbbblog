@@ -14,10 +14,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-<<<<<<< HEAD
-=======
     "element-ui": "^2.13.2",
->>>>>>> 608f884e1fc3563ba3f222b0b4314bdc424fc97c
+    "less-loader": "^4.1.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -53,6 +51,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
+    "less": "^3.11.3",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
