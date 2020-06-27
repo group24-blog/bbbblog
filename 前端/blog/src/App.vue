@@ -7,19 +7,29 @@
         <code v-text="'<el-button>'"></code>
         below
       </p>
-      <el-button>el-button</el-button>
+		  <el-button>SignUp</el-button>
     </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<!--这个是重点，页面跳转的渲染都在这里实现-->
+	<router-view></router-view>
+    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+import	SignUp from	'./components/SignUp.vue'
 export default {
   name: 'app',
   components: {
+    //SignUp
     HelloWorld
+  },
+  data(){
+	  return{
+		  UrlData:{
+			  signup:'/signup'
+		  }
+	  }
   }
 }
 </script>
