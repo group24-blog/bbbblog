@@ -1,10 +1,10 @@
 <template>
 <!--使用带验证功能的表单，来判断密码、用户名等是否符合-->
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" style="width:400px;margin: auto;padding-right:60px;
+<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" style="width:400px;margin: auto;padding-right:60px;margin-top: 5%;
 border:solid #AAAAAA 4px;border-radius: 10px;">
 	<el-row style="text-align: left;width: 100%;">
 		<el-col>
-			<el-button icon="el-icon-back" style="border: none" click="back"></el-button>
+			<el-button icon="el-icon-back" style="border: none" v-on:click="back"></el-button>
 		</el-col>
 	</el-row>
 		<el-form-item label="用户名" prop="name">
@@ -30,7 +30,7 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 	</el-form-item>
 	<!--注册-->
 	<el-form-item style="width: 100%;">
-		<el-button type="primary" style="width: 100%" :loading="true" v-on:click="signup">注册</el-button>
+		<el-button type="primary" style="width: 100%" v-on:click="signup">注册</el-button>
 	</el-form-item>
 		
 </el-form>
@@ -96,12 +96,11 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 		},
 		methods:{
 			signup:function(){
-				this.$http.post("UrlData.currentUrl"+"UrlData.postUrl", {
-				    name: this.$refs.ruleForm.name,
-				    password: this.$refs.ruleForm.password,
-					email:this.$refs.ruleForm.email,
-					sex:this.$refs.ruleForm.sex
-				  })
+				this.$refs.rules.validate(async (valid) =>{
+					if(!valid)
+						return 0
+				}),
+				this.$http.post("UrlData.currentUrl"+"UrlData.postUrl",this.ruleForm)
 				  .then(function (response) {
 					  /*注册成功、用户名已被注册等情况
 					  *注册成功：state=0，用户已被注册:state=1,莫名其妙：state=3?

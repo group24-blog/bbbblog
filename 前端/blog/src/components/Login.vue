@@ -1,5 +1,8 @@
 <template>
     <div class="login_container" :style="backgroundPic">
+	<div>
+		<img src="../assets/登录标语.png" alt="" class="title">
+	</div>
       <div class="login_box">
         <!-- 头像区 -->
         <div class="awatar_box">
@@ -26,7 +29,7 @@
             <el-button type="primary" class="btn2"  @click="login">登录</el-button>
           </el-form-item>
           <el-form-item class="elsebtn">
-            <el-button type="text" class="btn1">注册账号</el-button>
+            <el-button type="text" class="btn1" @click="signup">注册账号</el-button>
             <el-button type="text" class="btn3">忘记密码</el-button>
           </el-form-item>
         </el-form>
@@ -46,7 +49,7 @@ export default {
       backgroundPic: {
         backgroundImage: 'url(' + require('../assets/登录柠檬.jpg') + ')',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '70% 100%'
+        backgroundSize: 'contain'
       },
       // 表单验证规则对象
       loginFormRules: {
@@ -64,23 +67,33 @@ export default {
         const result = await this.$http.post('http://192.168.1.102：8181/user/login', this.loginForm)
         console.log(result)
       })
-    }
+    },
+	signup(){
+		this.$router.push('/signup')
+	}
   }
 }
 </script>
 
 <style lang="less" scoped>
 .login_container{
-  background-color: aliceblue;
+  background-color: white;
   height: 100%;
+  width: auto;
+}
+.title{
+	width:180px;
+	margin-top:1%;
+	margin-left:65%
 }
   .login_box{
     width: 350px;
     height: 400px;
-    background-color: white;
-    border-radius: 3px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
     position: absolute;
-    left: 71%;
+	margin: auto;
+    left: 68%;
     top: 20%;
     .awatar_box{
       height: 100px;
@@ -126,6 +139,7 @@ export default {
       left: 5%;
       .btn2{
         position: absolute;
+		width: 100%;
         bottom: 0%;
         left: 0%;
       }
