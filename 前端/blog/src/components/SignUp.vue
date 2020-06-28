@@ -30,7 +30,7 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 	</el-form-item>
 	<!--注册-->
 	<el-form-item style="width: 100%;">
-		<el-button type="primary" style="width: 100%" v-on:click="signup">注册</el-button>
+		<el-button type="primary" style="width: 100%" :loading="true" v-on:click="signup">注册</el-button>
 	</el-form-item>
 		
 </el-form>
@@ -87,8 +87,46 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 						validator: validCheckPass,
 						trigger: 'blur'
 					}]
+				},
+				UrlData:{
+					currentUrl:'/signup',
+					postUrl:'/posting'
 				}
-
+			}
+		},
+		methods:{
+			signup:function(){
+				this.$http.post("UrlData.currentUrl"+"UrlData.postUrl", {
+				    name: this.$refs.ruleForm.name,
+				    password: this.$refs.ruleForm.password,
+					email:this.$refs.ruleForm.email,
+					sex:this.$refs.ruleForm.sex
+				  })
+				  .then(function (response) {
+					  /*注册成功、用户名已被注册等情况
+					  *注册成功：state=0，用户已被注册:state=1,莫名其妙：state=3?
+					  * */
+					  if(response.state===0){
+						  //注册成功转到主页
+					  }
+					  else if(response.state===1){
+						  //用户已被注册，报错
+						  this.$message('该用户已被注册')
+					  }
+					  else {
+						  //莫名其妙地错
+						  this.$message('注册失败，请重新尝试')
+					  }
+				    console.log(response);
+				  })
+				  .catch(function (error) {
+					  this.$message('链接服务器失败')
+				    console.log(error);
+				  });
+			},
+			//返回登录页面
+			back:function(){
+				this.$router.push('/login')
 			}
 		}
 	}

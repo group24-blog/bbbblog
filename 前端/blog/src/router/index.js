@@ -11,7 +11,8 @@ export default new Router({
     },
     {
       path: '/login',
-      component: Login
+      component: Login,
+	  mode:history
     }
   ]
 })
