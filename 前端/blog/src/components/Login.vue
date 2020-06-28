@@ -92,7 +92,7 @@ export default {
     background-color: #DDDDDD;
     border-radius: 10px;
     position: absolute;
-	margin: auto;
+	  margin: auto;
     left: 68%;
     top: 20%;
     .awatar_box{

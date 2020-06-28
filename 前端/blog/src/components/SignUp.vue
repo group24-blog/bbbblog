@@ -1,8 +1,8 @@
 <template>
+  <div class="sign_container" id="signBgPic">
 <!--使用带验证功能的表单，来判断密码、用户名等是否符合-->
-<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" style="width:400px;margin: auto;padding-right:60px;margin-top: 5%;
-border:solid #AAAAAA 4px;border-radius: 10px;">
-	<el-row style="text-align: left;width: 100%;">
+<el-form  class="signForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+	<el-row class="backBtn" >
 		<el-col>
 			<el-button icon="el-icon-back" style="border: none" v-on:click="back"></el-button>
 		</el-col>
@@ -29,11 +29,11 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 		<el-input v-model="ruleForm.password2" placeholder="请再次输入密码" show-password></el-input>
 	</el-form-item>
 	<!--注册-->
-	<el-form-item style="width: 100%;">
+	<el-form-item class="signbtn" >
 		<el-button type="primary" style="width: 100%" v-on:click="signup">注册</el-button>
 	</el-form-item>
-		
 </el-form>
+  </div>
 </template>
 
 <script>
@@ -76,14 +76,17 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 				},
 				rules: {
 					name: [{
+					  require:true,
 						validator: validataName,
 						trigger: 'blur'
 					}],
 					password: [{
+            require:true,
 						validator: validataPass,
 						trigger: 'blur'
 					}],
 					password2: [{
+            require:true,
 						validator: validCheckPass,
 						trigger: 'blur'
 					}]
@@ -91,12 +94,14 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 				UrlData:{
 					currentUrl:'/signup',
 					postUrl:'/posting'
-				}
+				},
+
 			}
 		},
 		methods:{
 			signup:function(){
-				this.$refs.rules.validate(async (valid) =>{
+			  //这里来原来是rules我改成了ruleForm，不知道会不会影响到你的功能，留意一下
+				this.$refs.ruleForm.validate(async (valid) =>{
 					if(!valid)
 						return 0
 				}),
@@ -131,5 +136,38 @@ border:solid #AAAAAA 4px;border-radius: 10px;">
 	}
 </script>
 
-<style>
+<style lang="less" scoped>
+#signBgPic{
+    background: url("../assets/注册.png");
+    width:100%;
+    height:100%;
+    position:fixed;
+    background-size:100% 100%;
+}
+  .sign_container {
+
+  height: 100%;
+  width: auto;
+}
+      .signForm {
+        background-color: white;
+        position: absolute;
+        height: 400px;
+        width: 350px;
+        top: 10%;
+        left: 40%;
+        padding-right: 60px;
+        border: solid #AAAAAA 4px;
+        border-radius: 10px;
+        .backbtn {
+          position: absolute;
+          text-align: left;
+          width: 100%;
+        }
+        .signbtn {
+          position: absolute;
+          width: 100%;
+          left: -10%;
+        }
+      }
 </style>
