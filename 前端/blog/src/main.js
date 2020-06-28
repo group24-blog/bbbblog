@@ -7,7 +7,7 @@ import './plugins/element.js'
 import './assets/css/global.css'
 
 import axios from 'axios'
-axios.defaults.baseURI = 'http://192.168.1.102:8181/login/user'
+axios.defaults.baseURI = 'http://192.168.1.102：8181/user/login'
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false

@@ -7,8 +7,8 @@
         </div>
         <!-- 登录区 -->
         <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="80px" size="mini" class="login_form">
-          <el-form-item label="账号" prop="username">
-            <el-input v-model="loginForm.username"
+          <el-form-item label="账号" prop="id">
+            <el-input v-model="loginForm.id"
               placeholder="请输入账号"
               prefix-icon="el-icon-user">
             </el-input>
@@ -19,9 +19,15 @@
               prefix-icon="el-icon-lock">
             </el-input>
           </el-form-item>
-          <el-form-item class="btns">
-            <el-button type="primary" @click="login">登录</el-button>
-            <el-button type="info" @click="resetLoginForm">取消</el-button>
+        </el-form>
+        <!-- 按钮区 -->
+        <el-form class="buttons">
+          <el-form-item class="loginbtn">
+            <el-button type="primary" class="btn2"  @click="login">登录</el-button>
+          </el-form-item>
+          <el-form-item class="elsebtn">
+            <el-button type="text" class="btn1">注册账号</el-button>
+            <el-button type="text" class="btn3">忘记密码</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -34,17 +40,17 @@ export default {
     return {
       // 登录表单的数据绑定对象
       loginForm: {
-        username: '',
+        id: '',
         password: ''
       },
       backgroundPic: {
         backgroundImage: 'url(' + require('../assets/登录柠檬.jpg') + ')',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: '100% 100%'
+        backgroundSize: '70% 100%'
       },
       // 表单验证规则对象
       loginFormRules: {
-        name: [ { required: true, message: '请输入用户账号', trigger: 'blur' },
+        id: [ { required: true, message: '请输入用户账号', trigger: 'blur' },
           { min: 10, max: 10, message: '输入的账号不正确', trigger: 'blur' }],
         password: [{ required: true, message: '请输入用户密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在6-15个字符', trigger: 'blur' }]
@@ -52,14 +58,10 @@ export default {
     }
   },
   methods: {
-    // 点击取消
-    resetLoginForm () {
-      this.$refs.loginFormRef.resetFields()
-    },
     login () {
       this.$refs.loginFormRef.validate(async (valid) => {
         if (!valid) return 0
-        const result = await this.$http.post('http://192.168.1.102:8181/login/user', this.loginForm)
+        const result = await this.$http.post('http://192.168.1.102：8181/user/login', this.loginForm)
         console.log(result)
       })
     }
@@ -69,17 +71,17 @@ export default {
 
 <style lang="less" scoped>
 .login_container{
-  background-color: antiquewhite;
+  background-color: aliceblue;
   height: 100%;
 }
   .login_box{
     width: 350px;
-    height: 450px;
-    background-color: aliceblue;
+    height: 400px;
+    background-color: white;
     border-radius: 3px;
     position: absolute;
-    left: 60%;
-    top: 10%;
+    left: 71%;
+    top: 20%;
     .awatar_box{
       height: 100px;
       width: 100px;
@@ -97,18 +99,42 @@ export default {
         border-radius: 50%;
         background-color: #eeeeee;
       }
-
     }
   }
-  .login_form{
+  .login_form {
     position: absolute;
-    bottom: 20%;
-    left: 8%;
+    bottom: 25%;
+    left: 5%;
     padding: 0 10px;
     box-sizing: border-box;
   }
-  .btns{
-    display: flex;
-    justify-content: flex-end;
+  .buttons{
+    width: 250px;
+    height: 100px;
+    position: absolute;
+    bottom: 0%;
+    .loginbtn{
+      position: absolute;
+      width: 100%;
+      bottom: 40%;
+      left: 60%;
+    }
+    .elsebtn{
+      position: absolute;
+      bottom: -10%;
+      width: 100%;
+      left: 5%;
+      .btn2{
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+      }
+      .btn3{
+        position: absolute;
+        bottom: 0%;
+        left: 100%;
+      }
+    }
+
   }
 </style>
