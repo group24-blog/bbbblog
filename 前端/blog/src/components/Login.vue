@@ -84,7 +84,7 @@ export default {
 .title{
 	width:180px;
 	margin-top:1%;
-	margin-left:65%
+	margin-left:68%
 }
   .login_box{
     width: 350px;
