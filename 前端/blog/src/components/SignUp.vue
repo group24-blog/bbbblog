@@ -155,7 +155,8 @@
         height: 400px;
         width: 350px;
         top: 10%;
-        left: 40%;
+        left: 35%;
+		//margin:0 auto;
         padding-right: 60px;
         border: solid #AAAAAA 4px;
         border-radius: 10px;
