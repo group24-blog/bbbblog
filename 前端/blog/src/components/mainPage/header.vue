@@ -8,10 +8,10 @@
 	   <el-menu-item index="recommend">推荐内容</el-menu-item>
 	   <el-menu-item index="follow">关注内容</el-menu-item>
 	   <el-menu-item>
-		   <el-input
-		       placeholder="搜索" prefix-icon="el-icon-search" v-model="searchContent">
-		    </el-input>
-			<el-button class="button" @click="serch">搜索</el-button>
+		   <el-input class="inputBox" size="small"
+		        prefix-icon="el-icon-search" v-model="searchContent">
+		    <el-button slot="append" type="primary" class="button" @click="serch">搜索</el-button>
+			</el-input>
 	   </el-menu-item>
 	   <el-menu-item index="writeBlog">发表博客</el-menu-item>
 	 </el-menu>
@@ -61,5 +61,10 @@
 		  width:32px;
 		  height:32px;
 		  border-radius:50%;
+	}
+	.inputBox{
+		width: 300px;
+		line-height: 28px;
+		border-radius: 10px;
 	}
 </style>
