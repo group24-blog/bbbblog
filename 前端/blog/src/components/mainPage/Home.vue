@@ -1,32 +1,29 @@
 <template>
 <div>
 	<!--将router设为true将根据index作为Path跳转-->
- <el-menu :default-active="this.$route.path" class="menu" router="true" mode="horizontal" @select="handleSelect">
-   <el-menu-item index="/info"><el-img class="pic" src="userpic"></el-menu-item>
-   <el-menu-item index="/myblog">个人博客</el-menu-item>
+ <el-menu :default-active="this.$route.path" class="menu" router="false" mode="horizontal" @select="handleSelect">
+   <el-img src="userpic" class="pic"></el-img>
+   <el-menu-item index="1" class="pic"><router-link to="/info">头像</router-link></el-menu-item>
+   <el-menu-item index="/myblog"><router-link to="myblog"></router-link>个人博客</el-menu-item>
    <el-menu-item index="/recommend">推荐内容</el-menu-item>
    <el-menu-item index="/follow">关注内容</el-menu-item>
-   <el-menu-item index="5">
+   <el-menu-item>
 	   <el-input
-	       placeholder="搜索"
-	       prefix-icon="el-icon-search"
-	       v-model="searchContent">
+	       placeholder="搜索" prefix-icon="el-icon-search" v-model="searchContent">
 	    </el-input>
 		<el-button class="button" @click="serch">搜索</el-button>
    </el-menu-item>
    <el-menu-item index="/publicBlog">发表博客</el-menu-item>
  </el-menu>
- <div>
-	 <router-view></router-view>
- </div>
  </div>
 </template>
 
 <script>
   export default {
     name: 'Home',
+	search:'',
 	props:{
-		userpic:''
+		userpic:'../assets/logo.png'
 	},
     data(){
 		return{
@@ -52,7 +49,7 @@
   }
   .userpic{
 	  width:32px;
-	  height=32px;
+	  height:32px;
 	  border-radius:50%;
   }
 .el-header {
