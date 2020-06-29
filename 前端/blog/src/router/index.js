@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Login from '../components/Login'
 import SignUp from '../components/SignUp'
 import Info from '../components/Info'
-import Home from '../components/Home'
+import Home from '../components/mainPage/Home'
+import Blogs from "../components/mainPage/blogView/viewlist"
 
 Vue.use(Router)
 
@@ -11,7 +12,7 @@ export default new Router({
 	mode:'history',
   routes: [
     {
-      path: '/', redirect: '/login'
+      path: '/', redirect: '/home'
     },
     {
       path: '/login',
@@ -23,11 +24,20 @@ export default new Router({
 	},
     {
       path: '/home',
-      component: Home
+	  children:[{
+	  		  path:'/info',
+	  		  component:Info
+	  },
+	  {
+	  		  path:'/myblog',
+	  		  component:Blogs
+	  }
+	  ],
+	  components:{
+	  		default:Home,
+			panel:Info,
+			panel:Blogs,
+	  		},
     },
-    {
-      path: '/info',
-      component: Info
-    }
   ]
 })

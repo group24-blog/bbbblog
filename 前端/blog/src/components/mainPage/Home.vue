@@ -3,7 +3,7 @@
 	<!--将router设为true将根据index作为Path跳转-->
  <el-menu :default-active="this.$route.path" class="menu" router="false" mode="horizontal" @select="handleSelect">
    <el-img src="userpic" class="pic"></el-img>
-   <el-menu-item index="1" class="pic"><router-link to="/info">头像</router-link></el-menu-item>
+   <el-menu-item index="/info" class="pic">头像</el-menu-item>
    <el-menu-item index="/myblog"><router-link to="myblog"></router-link>个人博客</el-menu-item>
    <el-menu-item index="/recommend">推荐内容</el-menu-item>
    <el-menu-item index="/follow">关注内容</el-menu-item>
@@ -15,11 +15,17 @@
    </el-menu-item>
    <el-menu-item index="/publicBlog">发表博客</el-menu-item>
  </el-menu>
+ <!--变化的部分-->
+ <div><router-view name="panel"></router-view></div>
  </div>
 </template>
 
 <script>
+	import Blogs from "./blogView/viewlist.vue";
+	import Info from "../Info.vue";
   export default {
+	  //局部刷新
+	  inject:['reload'],
     name: 'Home',
 	search:'',
 	props:{
@@ -27,7 +33,8 @@
 	},
     data(){
 		return{
-			searchContent:''
+			searchContent:'',
+			panel:"Blogs"
 		}
     },
     methods:{
@@ -38,7 +45,11 @@
 		  //搜索
 	  }
 
-    }
+    },
+	components:{
+		Blogs,
+		Info
+	}
 
   }
 </script>
