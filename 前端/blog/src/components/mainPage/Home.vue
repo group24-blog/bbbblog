@@ -1,4 +1,5 @@
 <template>
+<div>
 	<!--将router设为true将根据index作为Path跳转-->
  <el-menu :default-active="this.$route.path" class="menu" router="true" mode="horizontal" @select="handleSelect">
    <el-menu-item index="/info"><el-img class="pic" src="userpic"></el-menu-item>
@@ -15,6 +16,10 @@
    </el-menu-item>
    <el-menu-item index="/publicBlog">发表博客</el-menu-item>
  </el-menu>
+ <div>
+	 <router-view></router-view>
+ </div>
+ </div>
 </template>
 
 <script>
