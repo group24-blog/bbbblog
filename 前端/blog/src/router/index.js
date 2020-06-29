@@ -5,6 +5,7 @@ import SignUp from '../components/SignUp'
 import Info from '../components/Info'
 import Home from '../components/mainPage/Home'
 import Blogs from "../components/mainPage/blogView/viewlist"
+import Header from "../components/mainPage/header"
 
 Vue.use(Router)
 
@@ -24,20 +25,19 @@ export default new Router({
 	},
     {
       path: '/home',
+	  name:Home,
+	  components:{
+	  		default:Home,
+	  		mainheader:Header,
+	  		},
 	  children:[{
-	  		  path:'/info',
+	  		  path:'info',
 	  		  component:Info
 	  },
 	  {
-	  		  path:'/myblog',
+	  		  path:'myblog',
 	  		  component:Blogs
-	  }
-	  ],
-	  components:{
-	  		default:Home,
-			panel:Info,
-			panel:Blogs,
-	  		},
+	  }],
     },
   ]
 })

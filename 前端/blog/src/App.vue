@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <!-- 路由占位符 -->
+	<router-view name="mainheader"></router-view>
     <router-view v-if="isRouterAlive"></router-view>
   </div>
 </template>
