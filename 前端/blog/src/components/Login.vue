@@ -63,9 +63,11 @@ export default {
   methods: {
     login () {
       this.$refs.loginFormRef.validate(async (valid) => {
-        if (!valid) return 0
-        const result = await this.$http.post('http://192.168.1.102：8181/user/login', this.loginForm)
-        console.log(result)
+        //验证账号密码，后续添加
+        //if (!valid) return 0
+        //const result = await this.$http.post('http://192.168.1.102：8181/user/login', this.loginForm)
+        //console.log(result)
+        this.$router.push('/home')
       })
     },
 	signup(){
