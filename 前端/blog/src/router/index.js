@@ -37,6 +37,14 @@ export default new Router({
 	  {
 	  		  path:'myblog',
 	  		  component:Blogs
+	  },
+	  {
+		  path:'recommend',
+		  component:Blogs
+	  },
+	  {
+		  path:'follow',
+		  component:Blogs
 	  }],
     },
   ]
