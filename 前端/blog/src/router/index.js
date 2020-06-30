@@ -17,10 +17,12 @@ export default new Router({
     },
 
     {
+		name:Login
       path: '/login',
       component: Login,
     },
     {
+		name:SignUp,
       path:'/signup',
       component:SignUp,
     },
