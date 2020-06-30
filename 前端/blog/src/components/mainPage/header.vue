@@ -57,6 +57,7 @@
 <style>
   .menu{
     height: 100%;
+	padding-left:10%;
   }
   .userpic{
     width:32px;
