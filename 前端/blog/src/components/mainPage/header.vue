@@ -1,17 +1,17 @@
 <template>
 	<div>
 		<!--将router设为true将根据index作为Path跳转-->
-	 <el-menu :default-active="activeIndex" class="menu" router="true" mode="horizontal" @select="handleSelect">
+	 <el-menu :default-active="homeUrl" class="menu" router="true" mode="horizontal" @select="handleSelect">
 	   <el-img src="userpic" class="pic"></el-img>
-	   <el-menu-item index="info" class="pic">头像</el-menu-item>
-	   <el-menu-item index="myblog"><router-link to="myblog"></router-link>个人博客</el-menu-item>
-	   <el-menu-item index="recommend">推荐内容</el-menu-item>
-	   <el-menu-item index="follow">关注内容</el-menu-item>
+	   <el-menu-item index="/home/info" class="pic">头像</el-menu-item>
+	   <el-menu-item index="/home/myblog"><router-link to="myblog"></router-link>个人博客</el-menu-item>
+	   <el-menu-item index="/home/recommend">推荐内容</el-menu-item>
+	   <el-menu-item index="/home/follow">关注内容</el-menu-item>
 	   <el-menu-item>
 		   <el-input
 		       placeholder="搜索" prefix-icon="el-icon-search" v-model="searchContent">
+			   <el-button slot="append"  @click="search">搜索</el-button>
 		    </el-input>
-			<el-button class="button" @click="serch">搜索</el-button>
 	   </el-menu-item>
 	   <el-menu-item index="writeBlog">发表博客</el-menu-item>
 	 </el-menu>
@@ -21,7 +21,7 @@
 
 <script>
 	import Blogs from "./blogView/viewlist.vue";
-		import Info from "../Info.vue";
+	import Info from "../Info.vue";	
 	export default {
 		  //局部刷新
 		  inject:['reload'],
@@ -33,7 +33,8 @@
 	  data(){
 			return{
 				searchContent:'',
-				panel:"Blogs"
+				panel:"Blogs",
+				homeUrl:this.$route.path+"/myblog"
 			}
 	  },
 	  methods:{
