@@ -1,15 +1,15 @@
 <template>
   <div class="sign_container" id="signBgPic">
 <!--使用带验证功能的表单，来判断密码、用户名等是否符合-->
-<el-form  class="signForm" :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+<el-form  class="signForm" :model="ruleForm" :rules="rules" ref="ruleFormRef" label-width="100px">
 	<el-row class="backBtn" >
 		<el-col>
 			<el-button icon="el-icon-back" style="border: none" v-on:click="back"></el-button>
 		</el-col>
 	</el-row>
-		<el-form-item label="用户名" prop="name">
+		<el-form-item label="用户名" prop="account">
 			<!--使用v-model实现数据绑定-->
-			<el-input v-model="ruleForm.name" placeholder="请输入长度在3~10的用户名"></el-input>
+			<el-input v-model="ruleForm.account" placeholder="请输入长度在3~10的用户名"></el-input>
 		</el-form-item>
 	<!--单选框选择性别-->
 	<el-form-item label="性别" prop="sex" style="text-align: left;">
@@ -58,8 +58,8 @@
 			// 再次输入密码检验函数
 			var validCheckPass = (rule, value, callback) => {
 				if (value === '') {
-					callback(new Error('请再次输入密码！'))
-				} else if (!value.equals(this.ruleForm.password)) {
+					callback(new Error('请再次输入密码！'+value))
+				} else if (value!==this.ruleForm.password) {
 					callback(new Error('两次密码输入不一致！'))
 				} else {
 					callback()
@@ -68,7 +68,7 @@
 			return {
 				// 数据
 				ruleForm: {
-					name: '',
+					account: '',
 					sex: 'male',
 					email: '',
 					password: '',
@@ -77,7 +77,7 @@
 					password2:''
 				},
 				rules: {
-					name: [{
+					account: [{
 					  require:true,
 						validator: validataName,
 						trigger: 'blur'
@@ -102,33 +102,47 @@
 		},
 		methods:{
 			signup:function(){
+				var self=this
 			  //这里来原来是rules我改成了ruleForm，不知道会不会影响到你的功能，留意一下
-				this.$refs.ruleForm.validate(async (valid) =>{
+				this.$refs.ruleFormRef.validate(async (valid) =>{
 					if(!valid)
 						return 0
 				}),
-				this.$http.post({name:'SignUp'},this.ruleForm)
+				this.$http.post('http://07prjk91rd.52http.com/user/register',self.ruleForm)
 				  .then(function (response) {
 					  /*注册成功、用户名已被注册等情况
 					  *注册成功：state=1，用户已被注册:state=2,莫名其妙：state=3?
+					  * 这里的this代表axios，vue应该用self
 					  * */
 					  if(response.state===1){
-						  this.$message('注册成功')
+						  self.$notify({
+							  type:'sucess',
+							  message:'注册成功！'
+						  })
 						  //注册成功转到主页
 						  this.$router.push({name:'home'})
 					  }
 					  else if(response.state===2){
 						  //用户已被注册，报错
-						  this.$message('该用户已被注册')
+						  self.$notify({
+					  		  type:'warning',
+							  message:'该用户已被注册！'
+						  })
 					  }
 					  else {
 						  //莫名其妙地错
-						  this.$message('注册失败，请重新尝试')
+						  self.$notify.error({
+						  	  type:'sucess',
+						  	  message:'注册成功！'
+						  })
 					  }
 				    console.log(response);
 				  })
 				  .catch(function (error) {
-					  this.$message('链接服务器失败')
+					  self.$notify({
+						  type:'warning',
+							message:'连接服务器失败！'
+					  })
 				    console.log(error);
 				  });
 			},
