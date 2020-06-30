@@ -36,7 +36,7 @@
 <style>
 	.blogItem{
 		width:50%;
-		heght:130px;
+		height:130px;
 		border-radius: 10px;
 		padding:10px;
 	}

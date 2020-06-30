@@ -10,8 +10,8 @@
         </div>
         <!-- 登录区 -->
         <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="80px" size="mini" class="login_form">
-          <el-form-item label="账号" prop="id">
-            <el-input v-model="loginForm.id"
+          <el-form-item label="账号" prop="account">
+            <el-input v-model="loginForm.account"
               placeholder="请输入账号"
               prefix-icon="el-icon-user">
             </el-input>
@@ -43,8 +43,8 @@ export default {
     return {
       // 登录表单的数据绑定对象
       loginForm: {
-        id: '',
-        password: ''
+        account: 'shengziwei',
+        password: '1234567'
       },
       backgroundPic: {
         backgroundImage: 'url(' + require('../assets/登录柠檬.jpg') + ')',
@@ -53,7 +53,7 @@ export default {
       },
       // 表单验证规则对象
       loginFormRules: {
-        id: [ { required: true, message: '请输入用户账号', trigger: 'blur' },
+        account: [ { required: true, message: '请输入用户账号', trigger: 'blur' },
           { min: 10, max: 10, message: '输入的账号不正确', trigger: 'blur' }],
         password: [{ required: true, message: '请输入用户密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在6-15个字符', trigger: 'blur' }]
@@ -64,10 +64,13 @@ export default {
     login () {
       this.$refs.loginFormRef.validate(async (valid) => {
         //验证账号密码，后续添加
-        //if (!valid) return 0
-        //const result = await this.$http.post('http://192.168.1.102：8181/user/login', this.loginForm)
-        //console.log(result)
-        this.$router.push('/home')
+        if (!valid) return 0
+        const {data :res} = await this.$http.post('http://07prjk91rd.52http.com/user/login', this.loginForm)
+        if(res === false)  this.$message.error("登录失败！")
+        else {
+          this.$message.success('登录成功！')
+          this.$router.push('/home')
+        }
       })
     },
 	signup(){

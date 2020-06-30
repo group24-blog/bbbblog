@@ -10,42 +10,43 @@ import Header from "../components/mainPage/header"
 Vue.use(Router)
 
 export default new Router({
-	mode:'history',
+  mode:'history',
   routes: [
     {
       path: '/', redirect: '/home'
     },
+
     {
       path: '/login',
       component: Login,
     },
-	{
-		path:'/signup',
-		component:SignUp,
-	},
+    {
+      path:'/signup',
+      component:SignUp,
+    },
     {
       path: '/home',
-	  name:Home,
-	  components:{
-	  		default:Home,
-	  		mainheader:Header,
-	  		},
-	  children:[{
-	  		  path:'info',
-	  		  component:Info
-	  },
-	  {
-	  		  path:'myblog',
-	  		  component:Blogs
-	  },
-	  {
-		  path:'recommend',
-		  component:Blogs
-	  },
-	  {
-		  path:'follow',
-		  component:Blogs
-	  }],
+      name:Home,
+      components:{
+        default:Home,
+        mainheader:Header,
+      },
+      children:[{
+        path:'info',
+        component:Info
+      },
+        {
+          path:'myblog',
+          component:Blogs
+        },
+        {
+          path:'recommend',
+          component:Blogs
+        },
+        {
+          path:'follow',
+          component:Blogs
+        }],
     },
   ]
 })

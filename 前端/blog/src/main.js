@@ -7,8 +7,7 @@ import './plugins/element.js'
 import './assets/css/global.css'
 
 import axios from 'axios'
-//总之我先设成localhost
-axios.defaults.baseURI = 'http://localhost:8080'
+axios.defaults.baseURI = 'http://07prjk91rd.52http.com'
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
