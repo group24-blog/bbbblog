@@ -139,7 +139,7 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         //验证账号密码，后续添加
         if (!valid) return 0
-        const {data :res} = await this.$http.post('http://07prjk91rd.52http.com/user/login', this.loginForm)
+        const {data :res} = await this.$http.post('http://54g64mqf56.52http.com/login', this.loginForm)
         if(res === false)  this.$message.error("登录失败！")
         else {
           this.$message.success('登录成功！')

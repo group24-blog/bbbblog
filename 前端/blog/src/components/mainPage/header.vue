@@ -13,7 +13,7 @@
           <el-button slot="append" type="primary" class="button" @click="serch">搜索</el-button>
         </el-input>
       </el-menu-item>
-      <el-menu-item index="writeBlog">发表博客</el-menu-item>
+      <el-menu-item index="/home/edit">发表博客</el-menu-item>
     </el-menu>
     <!--变化的部分-->
   </div>
