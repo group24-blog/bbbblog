@@ -7,10 +7,10 @@ import Notifications from "vue-notification"
 Vue.prototype.$notify = Notification
 
 import axios from 'axios'
-<<<<<<< HEAD
-=======
+
+
 axios.defaults.baseURI = 'http://07prjk91rd.52http.com'
->>>>>>> 1a9062766f20d8a6ebaf20ac47445995e5e2be91
+
 Vue.prototype.$http = axios
 
 Vue.use(Notifications)
