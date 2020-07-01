@@ -6,6 +6,7 @@ import Info from '../components/Info'
 import Home from '../components/mainPage/Home'
 import Blogs from "../components/mainPage/blogView/viewlist"
 import Header from "../components/mainPage/header"
+import Edit	from "../components/mainPage/edit"
 
 Vue.use(Router)
 
@@ -48,7 +49,11 @@ export default new Router({
         {
           path:'follow',
           component:Blogs
-        }],
+        },
+		{
+			path:'edit',
+			component:Edit
+		}],
     },
   ]
 })
