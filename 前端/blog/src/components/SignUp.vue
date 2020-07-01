@@ -59,7 +59,7 @@
 			var validCheckPass = (rule, value, callback) => {
 				if (value === '') {
 					callback(new Error('请再次输入密码！'+value))
-				} else if (value!==this.ruleForm.password) {
+				} else if (value==this.ruleForm.password) {
 					callback(new Error('两次密码输入不一致！'))
 				} else {
 					callback()
@@ -108,13 +108,13 @@
 					if(!valid)
 						return 0
 				}),
-				this.$http.post('http://07prjk91rd.52http.com/user/register',self.ruleForm)
+				this.$http.post('http://54g64mqf56.52http.com/register',self.ruleForm)
 				  .then(function (response) {
 					  /*注册成功、用户名已被注册等情况
 					  *注册成功：state=1，用户已被注册:state=2,莫名其妙：state=3?
 					  * 这里的this代表axios，vue应该用self
 					  * */
-					  if(response.state===1){
+					  if(response.data===1){
 						  self.$notify({
 							  type:'sucess',
 							  message:'注册成功！'
@@ -122,7 +122,7 @@
 						  //注册成功转到主页
 						  this.$router.push({name:'home'})
 					  }
-					  else if(response.state===2){
+					  else if(response.data===2){
 						  //用户已被注册，报错
 						  self.$notify({
 					  		  type:'warning',
