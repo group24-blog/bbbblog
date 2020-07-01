@@ -26,7 +26,7 @@
 	</el-form-item>
 	<!--再次输入密码-->
 	<el-form-item label="确认密码" prop="password2">
-		<el-input v-model="ruleForm.password2" placeholder="请再次输入密码" show-password></el-input>
+		<el-input v-model="ruleCheck.password2" placeholder="请再次输入密码" show-password></el-input>
 	</el-form-item>
 	<!--注册-->
 	<el-form-item class="signbtn" >
@@ -72,7 +72,9 @@
 					sex: 'male',
 					email: '',
 					password: '',
-					password2: ''
+				},
+				ruleCheck:{
+					password2:''
 				},
 				rules: {
 					name: [{
@@ -105,15 +107,17 @@
 					if(!valid)
 						return 0
 				}),
-				this.$http.post("UrlData.currentUrl"+"UrlData.postUrl",this.ruleForm)
+				this.$http.post({name:'SignUp'},this.ruleForm)
 				  .then(function (response) {
 					  /*注册成功、用户名已被注册等情况
-					  *注册成功：state=0，用户已被注册:state=1,莫名其妙：state=3?
+					  *注册成功：state=1，用户已被注册:state=2,莫名其妙：state=3?
 					  * */
-					  if(response.state===0){
+					  if(response.state===1){
+						  this.$message('注册成功')
 						  //注册成功转到主页
+						  this.$router.push({name:'home'})
 					  }
-					  else if(response.state===1){
+					  else if(response.state===2){
 						  //用户已被注册，报错
 						  this.$message('该用户已被注册')
 					  }

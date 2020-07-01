@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="login_container" :style="backgroundPic">
     <div>
       <img src="../assets/登录标语.png" alt="" class="title">
@@ -7,6 +8,42 @@
       <!-- 头像区 -->
       <div class="awatar_box">
         <img src="../assets/logo.png" alt="" >
+=======
+    <div class="login_container" :style="backgroundPic">
+	<div>
+		<img src="../assets/登录标语.png" alt="" class="title">
+	</div>
+      <div class="login_box">
+        <!-- 头像区 -->
+        <div class="awatar_box">
+          <img src="../assets/logo.png" alt="" >
+        </div>
+        <!-- 登录区 -->
+        <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="80px" size="mini" class="login_form">
+          <el-form-item label="账号" prop="account">
+            <el-input v-model="loginForm.account"
+              placeholder="请输入账号"
+              prefix-icon="el-icon-user">
+            </el-input>
+          </el-form-item>
+          <el-form-item label="密码" prop="password">
+            <el-input v-model="loginForm.password" show-password
+              placeholder="请输入密码"
+              prefix-icon="el-icon-lock">
+            </el-input>
+          </el-form-item>
+        </el-form>
+        <!-- 按钮区 -->
+        <el-form class="buttons">
+          <el-form-item class="loginbtn">
+            <el-button type="primary" class="btn2"  @click="login">登录</el-button>
+          </el-form-item>
+          <el-form-item class="elsebtn">
+            <el-button type="text" class="btn1" @click="signup">注册账号</el-button>
+            <el-button type="text" class="btn3">忘记密码</el-button>
+          </el-form-item>
+        </el-form>
+>>>>>>> 1a9062766f20d8a6ebaf20ac47445995e5e2be91
       </div>
       <!-- 登录区 -->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="80px" size="mini" class="login_form">
@@ -38,6 +75,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
   export default {
     data () {
       return {
@@ -73,6 +111,46 @@
         this.$router.push('/signup')
       }
     }
+=======
+export default {
+  data () {
+    return {
+      // 登录表单的数据绑定对象
+      loginForm: {
+        account: 'shengziwei',
+        password: '1234567'
+      },
+      backgroundPic: {
+        backgroundImage: 'url(' + require('../assets/登录柠檬.jpg') + ')',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'contain'
+      },
+      // 表单验证规则对象
+      loginFormRules: {
+        account: [ { required: true, message: '请输入用户账号', trigger: 'blur' },
+          { min: 10, max: 10, message: '输入的账号不正确', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入用户密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在6-15个字符', trigger: 'blur' }]
+      }
+    }
+  },
+  methods: {
+    login () {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        //验证账号密码，后续添加
+        if (!valid) return 0
+        const {data :res} = await this.$http.post('http://07prjk91rd.52http.com/user/login', this.loginForm)
+        if(res === false)  this.$message.error("登录失败！")
+        else {
+          this.$message.success('登录成功！')
+          this.$router.push('/home')
+        }
+      })
+    },
+	signup(){
+		this.$router.push('/signup')
+	}
+>>>>>>> 1a9062766f20d8a6ebaf20ac47445995e5e2be91
   }
 </script>
 
