@@ -16,6 +16,8 @@ Vue.use(Notifications)
 
 Vue.config.productionTip = false
 
+/*注册评论组件*/
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
