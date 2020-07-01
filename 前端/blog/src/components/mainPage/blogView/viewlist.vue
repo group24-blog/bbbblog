@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<el-page-header @back="goBack" content="hello">
-		</el-page-header>
 		<BlogItem v-for="(item,index) in items"
 		:key="index">
 		</BlogItem>
