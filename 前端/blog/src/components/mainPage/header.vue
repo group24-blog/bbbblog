@@ -10,7 +10,7 @@
       <el-menu-item>
         <el-input class="inputBox" size="small"
                   prefix-icon="el-icon-search" v-model="searchContent">
-          <el-button slot="append" type="primary" class="button" @click="serch">搜索</el-button>
+          <el-button slot="append" type="primary" class="button" @click="search">搜索</el-button>
         </el-input>
       </el-menu-item>
       <el-menu-item index="/home/edit">发表博客</el-menu-item>
@@ -34,7 +34,8 @@
       return{
         searchContent:'',
         panel:"Blogs",
-        homeUrl:this.$route.path+"/myblog"
+        homeUrl:this.$route.path+"/myblog",
+
       }
     },
     methods:{
@@ -43,6 +44,7 @@
       },
       search(){
         //搜索
+
       }
 
     },
