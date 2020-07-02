@@ -8,6 +8,7 @@
         <div class="awatar_box">
           <img src="../assets/logo.png" alt="" >
         </div>
+
         <!-- 登录区 -->
         <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="80px" size="mini" class="login_form">
           <el-form-item label="账号" prop="account">
@@ -33,33 +34,6 @@
             <el-button type="text" class="btn3">忘记密码</el-button>
           </el-form-item>
         </el-form>
-
-      </div>
-      <!-- 登录区 -->
-      <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="80px" size="mini" class="login_form">
-        <el-form-item label="账号" prop="account">
-          <el-input v-model="loginForm.account"
-                    placeholder="请输入账号"
-                    prefix-icon="el-icon-user">
-          </el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input v-model="loginForm.password" show-password
-                    placeholder="请输入密码"
-                    prefix-icon="el-icon-lock">
-          </el-input>
-        </el-form-item>
-      </el-form>
-      <!-- 按钮区 -->
-      <el-form class="buttons">
-        <el-form-item class="loginbtn">
-          <el-button type="primary" class="btn2"  @click="login">登录</el-button>
-        </el-form-item>
-        <el-form-item class="elsebtn">
-          <el-button type="text" class="btn1" @click="signup">注册账号</el-button>
-          <el-button type="text" class="btn3">忘记密码</el-button>
-        </el-form-item>
-      </el-form>
     </div>
   </div>
 </template>
@@ -96,9 +70,7 @@ export default {
         if(res === false)  this.$message.error("登录失败！")
         else {
           this.$message.success('登录成功！')
-
 		  window.sessionStorage.setItem('account',this.loginForm.account)
-		  console.log(await this.$http.get('http://07prjk91rd.52http.com/user/get/'+ window.sessionStorage.getItem('account')))
           this.$router.push('/home')
         }
       })
@@ -186,4 +158,5 @@ export default {
     }
 
   }
+
 </style>
