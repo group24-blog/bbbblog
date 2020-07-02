@@ -3,12 +3,15 @@
 	<el-page-header @back="goBack"></el-page-header>
 		  <el-container>
 		    <el-aside style="width: 220px;">
-				<el-card class="author">
+				<el-card class="authorCard">
 					<div>
 						<el-avatar :size="50" :src="pic"></el-avatar>
-						<div>nobody</div>
-						<div>关注者：</div>
-						<el-button size="small" type="danger">关注</el-button>
+						<div class="author">nobody</div>
+						<el-row class="detail">
+							<el-col :span="12">关注者：</el-col>
+							<el-col :span="12">博客数：</el-col>
+						</el-row>
+						<el-button class="follow" size="small" type="danger">关注</el-button>
 					</div>
 				</el-card>
 			</el-aside>
@@ -52,10 +55,24 @@
 	.aside{
 		width: 200px;
 	}
-	.author{
+	.authorCard{
 		width: 200px;
 		text-align: center;
 		margin-top: 10%;
-		color: #AAAAAA;
+	}
+	.author{
+		font-size: 16px;
+		font-weight: bold;
+	}
+	.detail{
+		font-size: 14px;
+		color: #999999;
+		width:100%;
+		margin: auto;
+		margin-top: 10px;
+	}
+	.follow{
+		margin: auto;
+		margin-top: 10px;
 	}
 </style>
