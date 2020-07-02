@@ -4,10 +4,11 @@ import Login from '../components/Login'
 import SignUp from '../components/SignUp'
 import Info from '../components/Info'
 import Home from '../components/mainPage/Home'
-import Blogs from "../components/mainPage/blogView/viewlist"
+import MyBlogs from "../components/mainPage/blogView/myBlog"
+import Blogs from "../components/mainPage/blogView/viewlist.vue"
 import Header from "../components/mainPage/header"
 import Edit	from "../components/mainPage/edit"
-import MyBlogs from "../components/mainPage/blogView/myBlog"
+import Recommend from "../components/mainPage/recommend"
 import Test from "../components/blogPage/blogDetail.vue"
 
 Vue.use(Router)
@@ -16,7 +17,7 @@ export default new Router({
   mode:'history',
   routes: [
     {
-      path: '/', redirect: '/home/recommend'
+      path: '/', redirect: '/home/myblog'
     },
 
     {
@@ -51,7 +52,7 @@ export default new Router({
         },
         {
           path:'recommend',
-          component:Blogs
+          component:Recommend,
         },
         {
           path:'follow',
