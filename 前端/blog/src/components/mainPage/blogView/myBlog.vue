@@ -1,29 +1,60 @@
 <template>
 	<div class="block">
-	  <el-timeline>
-	    <el-timeline-item timestamp="2018/4/12" placement="top">
-	      <el-card>
-	        <h4>更新 Github 模板</h4>
-	        <p>王小虎 提交于 2018/4/12 20:46</p>
-	      </el-card>
-	    </el-timeline-item>
-	    <el-timeline-item timestamp="2018/4/3" placement="top">
-	      <el-card>
-	        <h4>更新 Github 模板</h4>
-	        <p>王小虎 提交于 2018/4/3 20:46</p>
-	      </el-card>
-	    </el-timeline-item>
-	    <el-timeline-item timestamp="2018/4/2" placement="top">
-	      <el-card>
-	        <h4>更新 Github 模板</h4>
-	        <p>王小虎 提交于 2018/4/2 20:46</p>
-	      </el-card>
-	    </el-timeline-item>
+	  <el-timeline v-if="num">
+		  <!--以空格分割日期字符串，时间戳只显示年月日-->
+		  <el-timeline-item v-for="blog in myBlogs" v-bind:key="blog.articleId" 
+		  @click="gotoDetail(blog)" v-bind:timestamp="getDate(blog)" placement="top">
+			  <el-card>
+			    <h4>{{blog.articleTitle}}</h4>
+				<p>{{blog.articleContent}}</p>
+			    <p style="float: right;">{{blog.articleUserAccount+" 提交于 "+blog.articleTime}}</p>
+			  </el-card>
+		  </el-timeline-item>
 	  </el-timeline>
+	  <el-divider v-else>一篇博客也没有哦</el-divider>
 	</div>
 </template>
 
 <script>
+	export default{
+		name:'myBlog',
+		data(){
+			return {
+				myBlogs:Array,
+				UrlData:{
+					baseUrl:'http://07prjk91rd.52http.com',
+					myBlogs:'/myblog/'
+				},
+				num:'false',
+				date:','
+			}
+		},
+		//挂载el的时候自动执行方法
+		mounted:function(){
+			this.getMyBlogs();
+		},
+		methods:{
+			async getMyBlogs(){
+				var account=window.sessionStorage.getItem('account');
+				const {data: res} = await this.$http.get('http://07prjk91rd.52http.com/blog/myblog/'+account)
+				console.log(res)
+				this.myBlogs=res;
+				if(res.length!=0)
+				{
+					this.num='true'
+				}
+			},
+			gotoDetail(blog){
+				this.$route.push({name:'detail',params:{articleId:blog.articleId}});
+			},
+			getDate(blog){
+				var date=blog.articleTime.split(" ")[0];
+				console.log(date)
+				return date;
+			}
+		}
+		
+	}
 </script>
 
 <style>
