@@ -69,9 +69,7 @@ export default {
         if(res === false)  this.$message.error("登录失败！")
         else {
           this.$message.success('登录成功！')
-
 		  window.sessionStorage.setItem('account',this.loginForm.account)
-		  console.log(await this.$http.get('http://07prjk91rd.52http.com/user/get/'+ window.sessionStorage.getItem('account')))
           this.$router.push('/home')
         }
       })
@@ -159,4 +157,5 @@ export default {
     }
 
   }
+
 </style>

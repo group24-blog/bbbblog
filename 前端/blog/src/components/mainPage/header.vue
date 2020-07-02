@@ -3,7 +3,7 @@
     <!--将router设为true将根据index作为Path跳转-->
     <el-menu :default-active="homeUrl" class="menu" router="true" @select="handleSelect" mode="horizontal">
       <el-img src="userpic" class="pic"></el-img>
-      <el-menu-item index="/home/info" class="pic">头像</el-menu-item>
+      <el-menu-item index="/home/info" class="pic">我</el-menu-item>
       <el-menu-item index="/home/myblog"><router-link to="myblog"></router-link>个人博客</el-menu-item>
       <el-menu-item index="/home/recommend">推荐内容</el-menu-item>
       <el-menu-item index="/home/follow">关注内容</el-menu-item>
