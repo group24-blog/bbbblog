@@ -2,13 +2,14 @@
 	<div class="blogItem">
 		<el-row>
 			<el-col :span="3">
-				<el-avatar :size="50" :src="rawData.src" @click="toAthor"></el-avatar>
+				<el-avatar :size="50" :src="rawData.avatarSrc" @click="toAuthor"></el-avatar>
 				<div class="author">{{rawData.author}}</div>
 			</el-col>
 			<el-col :span="18">
 				<el-card class="blogCard" @click="detail">
 					  <div slot="header" class="title">
 					    <span>{{rawData.blogTitle}}</span>
+						<div class="date">{{rawData.time}}</div>
 					   </div>
 				<div class="content">{{rawData.blogContent}}</div>
 				</el-card>
@@ -24,11 +25,11 @@
 			return{
 				rawData:{
 					blogTitle: "博客标题",
-					requestUrl: {type: String, default: "this.$http.defaults"},
 					blogContent:"博客内容",
 					author:"nobody",
+					time:'1970/01/01 00:00',
 					blogid:0,
-					src:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+					avatarSrc:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
 					}
 			}
 		},
@@ -90,5 +91,12 @@
 		text-align: center;
 		margin-top: 10%;
 		color: #AAAAAA;
+	}
+	.date{
+		float:right;
+		font-size: 12px;
+		color: #999999;
+		font-weight: lighter;
+		margin-top: 15px;
 	}
 </style>

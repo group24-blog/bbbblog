@@ -1,7 +1,12 @@
 <template>
 	<div>
-		<BlogItem v-for="(item,index) in items"
-		:key="index">
+		<BlogItem v-for="blog in blogs" 
+		v-bind:key="blog.articleId"
+		:blogTitle="blog.articleTitle"
+		:avatarSrc="blog.avatarSrc"
+		:blogContent="blog.articleContent"
+		:author="blog.articleUserAccount"
+		:time="blog.articleTime">
 		</BlogItem>
 	</div>
 </template>
@@ -9,22 +14,34 @@
 <script>
 	import BlogItem from './blogitem'
 	export default {
+		name:"ViewList",
 		data(){
 			return {
+				//后端接口
+				url:'',
 				//最终展示的也是它items为所有item的集合
-				items:[{}],
+				Blogs:[],
 				//返回的未处理的一堆数据
 				rawData:[{}],
 				//每次处理10条预览
 				size:10,
-				content:'recommend',
 				user:{default:'none'}
 			}
 		},
 		components:{
 			BlogItem
 		},
+		mounted:function(){
+			this.getList();
+		},
 		methods:{
+			async getList(){
+				var account=window.sessionStorage.getItem('account');
+				var toUrl=this.url;
+				const {data: res} = await this.$http.get(toUrl+account);
+				console.log(res);
+				this.Blogs=res;
+			},
 			goBack(){
 				//返回主页
 				this.$router.push('/home')
