@@ -30,7 +30,7 @@
 			}
 		},
 		//挂载el的时候自动执行方法
-		mounted:function(){
+		created:function(){
 			this.getMyBlogs();
 		},
 		methods:{

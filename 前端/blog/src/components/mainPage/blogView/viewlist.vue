@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<BlogItem v-for="blog in blogs" 
+		<BlogItem v-for="blog in Blogs" 
 		v-bind:key="blog.articleId"
 		:blogTitle="blog.articleTitle"
 		:avatarSrc="blog.avatarSrc"
@@ -17,27 +17,30 @@
 		name:"ViewList",
 		data(){
 			return {
-				//后端接口
-				url:'',
-				//最终展示的也是它items为所有item的集合
-				Blogs:[],
 				//返回的未处理的一堆数据
 				rawData:[{}],
 				//每次处理10条预览
 				size:10,
-				user:{default:'none'}
 			}
+		},
+		props:{
+			//后端接口
+			url:String,
+			//最终展示的也是它items为所有item的集合
+			Blogs:Array,
 		},
 		components:{
 			BlogItem
 		},
 		mounted:function(){
+			console.log(this.url);
 			this.getList();
 		},
 		methods:{
 			async getList(){
 				var account=window.sessionStorage.getItem('account');
 				var toUrl=this.url;
+				console.log(toUrl);
 				const {data: res} = await this.$http.get(toUrl+account);
 				console.log(res);
 				this.Blogs=res;

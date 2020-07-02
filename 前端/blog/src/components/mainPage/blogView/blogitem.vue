@@ -2,16 +2,16 @@
 	<div class="blogItem">
 		<el-row>
 			<el-col :span="3">
-				<el-avatar :size="50" :src="rawData.avatarSrc" @click="toAuthor"></el-avatar>
-				<div class="author">{{rawData.author}}</div>
+				<el-avatar :size="50" :src="this.avatarSrc" @click="toAuthor"></el-avatar>
+				<div class="author">{{this.author}}</div>
 			</el-col>
 			<el-col :span="18">
 				<el-card class="blogCard" @click="detail">
 					  <div slot="header" class="title">
-					    <span>{{rawData.blogTitle}}</span>
-						<div class="date">{{rawData.time}}</div>
+					    <span>{{this.blogTitle}}</span>
+						<div class="date">{{this.time}}</div>
 					   </div>
-				<div class="content">{{rawData.blogContent}}</div>
+				<div class="content">{{this.blogContent}}</div>
 				</el-card>
 			</el-col>
 		</el-row>
@@ -23,15 +23,15 @@
 		name:"blogitem",
 		data(){
 			return{
-				rawData:{
-					blogTitle: "博客标题",
-					blogContent:"博客内容",
-					author:"nobody",
-					time:'1970/01/01 00:00',
-					blogid:0,
-					avatarSrc:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-					}
-			}
+				}
+		},
+		props:{
+			blogTitle: String,
+			blogContent:String,
+			author:String,
+			time:String,
+			blogid:Number,
+			avatarSrc:String,
 		},
 		methods:{
 			open(){
