@@ -13,7 +13,7 @@
 		name:"recommend",
 		data(){
 			return{
-				url:'',
+				url:'http://07prjk91rd.52http.com/blog/recommend/',
 			}
 		},
 		components:{
