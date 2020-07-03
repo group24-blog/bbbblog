@@ -38,7 +38,7 @@
       return{
         searchContent:'',
         panel:"Blogs",
-        homeUrl:this.$route.path+"/recommend",
+        homeUrl:this.$route.path+"/myblog",
 				iflogin:'登录'
       }
     },

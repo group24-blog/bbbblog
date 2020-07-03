@@ -115,10 +115,14 @@
       }
     },
 	created(){
-		
-		this.getUserInfo()
-		this.getFollow()
-		this.getFollowed()	
+		if(window.sessionStorage.getItem('iflogin') === 'true'){
+			this.getUserInfo()
+			this.getFollow()
+			this.getFollowed()	
+		}
+		else{
+			this.$message.error('请先登录')
+		}
 		
 	},
     methods:{

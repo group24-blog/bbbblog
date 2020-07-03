@@ -16,6 +16,11 @@
 				url:'http://07prjk91rd.52http.com/blog/recommend/'+account,
 			}
 		},
+		created() {
+			if(window.sessionStorage.getItem('iflogin') !== 'true'){
+				this.$message.error('请先登录');
+				}
+		},
 		components:{
 			"blog-list":ViewList,
 		}

@@ -36,6 +36,11 @@
 				},
 			}
 		},
+		created() {
+			if(window.sessionStorage.getItem('iflogin') !== 'true'){
+				this.$message.error('请先登录');
+				}
+		},
 		methods:{
 			
 			sendBlog(){
@@ -50,7 +55,6 @@
 				  	}
 				})
 			}
-
 		}
 	}
 </script>

@@ -30,7 +30,7 @@
 	</el-form-item>
 	<!--注册-->
 	<el-form-item class="signbtn" >
-		<el-button type="primary" style="width: 100%" v-on:click="signup">注册</el-button>
+		<el-button type="primary" style="width: 100%" @click="signup">注册</el-button>
 	</el-form-item>
 </el-form>
   </div>
@@ -101,56 +101,56 @@
 			}
 		},
 		methods:{
-			signup:function(){
-				var self=this
-			  //这里来原来是rules我改成了ruleForm，不知道会不会影响到你的功能，留意一下
-				this.$refs.ruleFormRef.validate(async (valid) =>{
-					if(!valid)
-						return 0
-				}),
-				this.$http.post('http://54g64mqf56.52http.com/register',self.ruleForm)
-				  .then(function (response) {
-					  /*注册成功、用户名已被注册等情况
-					  *注册成功：state=1，用户已被注册:state=2,莫名其妙：state=3?
-					  * 这里的this代表axios，vue应该用self
-					  * */
-					  if(response.data===1){
-						  self.$notify({
-							  type:'sucess',
-							  message:'注册成功！'
+					signup:function(){
+						var self=this
+			
+						this.$refs.ruleFormRef.validate(async (valid) =>{
+							if(!valid)
+								return 0
+						}),
+						this.$http.post('http://07prjk91rd.52http.com/user/register',self.ruleForm)
+						  .then(function (response) {
+							  /*注册成功、用户名已被注册等情况
+							  *注册成功：state=1，用户已被注册:state=2,莫名其妙：state=3?
+							  * 这里的this代表axios，vue应该用self
+							  * */
+							  if(response.data===1){
+								  self.$message({
+									  type:'success',
+									  message:'注册成功！'
+								  })
+		              self.$router.push("/login")
+							  }
+							  else if(response.data===2){
+								  //用户已被注册，报错
+								  self.$message({
+							  		  type:'warning',
+									     message:'该用户已被注册！'
+								  })
+							  }
+							  else {
+								  //莫名其妙地错
+								  self.$notify.error({
+								  	  type:'sucess',
+								  	  $message:'注册成功！'
+								  })
+							  }
+						    console.log(response);
+		
 						  })
-						  //注册成功转到主页
-						  this.$router.push({name:'home'})
-					  }
-					  else if(response.data===2){
-						  //用户已被注册，报错
-						  self.$notify({
-					  		  type:'warning',
-							  message:'该用户已被注册！'
-						  })
-					  }
-					  else {
-						  //莫名其妙地错
-						  self.$notify.error({
-						  	  type:'sucess',
-						  	  message:'注册成功！'
-						  })
-					  }
-				    console.log(response);
-				  })
-				  .catch(function (error) {
-					  self.$notify({
-						  type:'warning',
-							message:'连接服务器失败！'
-					  })
-				    console.log(error);
-				  });
-			},
-			//返回登录页面
-			back:function(){
-				this.$router.push('/login')
-			}
-		}
+						  .catch(function (error) {
+							  self.$notify({
+								  type:'warning',
+									message:'连接服务器失败！'
+							  })
+						    console.log(error);
+						  });
+					},
+					//返回登录页面
+					back:function(){
+						this.$router.push('/login')
+					}
+				}
 	}
 </script>
 

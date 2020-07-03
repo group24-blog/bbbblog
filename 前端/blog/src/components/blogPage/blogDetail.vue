@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<router-view name="mainheader"></router-view>
-		<el-page-header @back="goBack"></el-page-header>
+		<el-page-header @back="goBack">返回</el-page-header>
 		<el-container>
 			<el-aside style="width: 220px;">
 				<el-card class="authorCard">
@@ -42,6 +42,7 @@
 	import Comment from "./comment.vue"
 	export default {
 		name: 'blogDetail',
+		inject:['reload'],
 		data() {
 			return {
 				Id: 2,
@@ -50,8 +51,13 @@
 				Comments:[],
 				Author: {},
 				blogNum:0,
-				FollowButtonContent:'关注'
+				FollowButtonContent:'关注',
+				Follow:{
+					nowAccount:'',
+					articleId:''
+				}
 			}
+			
 		},
 		components: {
 			//注册
@@ -60,30 +66,46 @@
 		created: function() {
 			console.log("begin");
 			this.getBlog();
+
 		},
 		methods: {
 			goBack() {
-				this.$http.push('/home')
+				this.$router.push('home/myblog')
 			},
 			async getBlog() {
 				this.Id =Number (this.$route.query.blogId);
 				var id=this.Id;
 				var url=this.Url;
-				console.log(this.Id);
-				const {
-					data: res
-				} = await this.$http.get(url+id);
-				console.log(res);
+				const {data: res} = await this.$http.get(url+ id+'/' +window.sessionStorage.getItem('account'))
 				this.Blog = res;
 				this.Author=res.atticleUser;
 				this.blogNum=res.blogNum;
 				this.Comments=res.briefCommentList;
-				consle.log(this.Comments);
+				if(res.ifFollow === true){
+					this.FollowButtonContent = '已关注'
+				}
+				else{
+					this.FollowButtonContent = '关注'
+			
+			}
 			},
 			//关注博主
-			follow(){
-				
+			async follow(){
+				this.Follow.nowAccount = window.sessionStorage.getItem('account');
+				this.Follow.articleId = this.Id;
+				const {data: res} = await this.$http.post('http://07prjk91rd.52http.com/user/follow',this.Follow);
+				if(res === true){
+					this.$message.success('关注成功');
+					this.FollowButtonContent = '已关注';
+					this.reload();
+				}
+				else{
+					this.$message.success('关注失败');
+				}
+			
 			}
+			
+
 		}
 	}
 </script>

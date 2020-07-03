@@ -31,7 +31,12 @@
 		},
 		//挂载el的时候自动执行方法
 		created:function(){
-			this.getMyBlogs();
+			if(window.sessionStorage.getItem('iflogin') === 'true'){
+				this.getMyBlogs();
+			}
+			else{
+				this.$message.error('请先登录')
+			}
 		},
 		methods:{
 			async getMyBlogs(){

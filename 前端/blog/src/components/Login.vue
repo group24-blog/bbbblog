@@ -43,8 +43,8 @@ export default {
     return {
       // 登录表单的数据绑定对象
       loginForm: {
-        account: 'shengziwei',
-        password: '1234567'
+        account: '',
+        password: ''
       },
       backgroundPic: {
         backgroundImage: 'url(' + require('../assets/登录柠檬.jpg') + ')',
@@ -54,11 +54,14 @@ export default {
       // 表单验证规则对象
       loginFormRules: {
         account: [ { required: true, message: '请输入用户账号', trigger: 'blur' },
-          { min: 10, max: 10, message: '输入的账号不正确', trigger: 'blur' }],
+          { min: 3, max: 12, message: '输入的账号不正确', trigger: 'blur' }],
         password: [{ required: true, message: '请输入用户密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在6-15个字符', trigger: 'blur' }]
       }
     }
+  },
+  created() {
+  	window.sessionStorage.setItem('iflogin','false')
   },
   methods: {
     login () {
