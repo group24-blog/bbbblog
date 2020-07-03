@@ -30,7 +30,7 @@
         </el-form-item>
         <el-form-item class="elsebtn">
           <el-button type="text" class="btn1" @click="signup">注册账号</el-button>
-          <el-button type="text" class="btn3">忘记密码</el-button>
+          <el-button type="text" class="btn3" @click="forget">忘记密码</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -63,19 +63,31 @@ export default {
   methods: {
     login () {
       this.$refs.loginFormRef.validate(async (valid) => {
-        //验证账号密码，后续添加
+        
         if (!valid) return 0
         const {data :res} = await this.$http.post('http://07prjk91rd.52http.com/user/login', this.loginForm)
         if(res === false)  this.$message.error("登录失败！")
         else {
           this.$message.success('登录成功！')
 		  window.sessionStorage.setItem('account',this.loginForm.account)
+		  window.sessionStorage.setItem('iflogin','true')
           this.$router.push('/home')
         }
       })
     },
 	signup(){
 		this.$router.push('/signup')
+	},
+	forget(){
+		  this.$alert('这么重要的东西你忘了我也没办法，建议去注册^_^', '忘了就忘了吧，找不回来了', {
+		          confirmButtonText: '确定',
+		          callback: action => {
+		            this.$message({
+		              type: 'info',
+		              message: `action: ${ action }`
+		            });
+				}	
+				 });
 	}
   },
 }
