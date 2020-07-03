@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<BlogItem v-for="blog in Blogs" 
+		<BlogItem v-if="blogNum>0" v-for="blog in Blogs" 
 		v-bind:key="blog.articleId"
 		:blogTitle="blog.articleTitle"
 		:avatarSrc="blog.avatarSrc"
@@ -8,6 +8,7 @@
 		:author="blog.articleUserAccount"
 		:time="blog.articleTime">
 		</BlogItem>
+		 <el-divider v-else>这里还什么都没有哦</el-divider>
 	</div>
 </template>
 
@@ -21,6 +22,8 @@
 				rawData:[{}],
 				//每次处理10条预览
 				size:10,
+				//博客数
+				blogNum:0,
 			}
 		},
 		props:{
@@ -38,12 +41,12 @@
 		},
 		methods:{
 			async getList(){
-				var account=window.sessionStorage.getItem('account');
 				var toUrl=this.url;
 				console.log(toUrl);
-				const {data: res} = await this.$http.get(toUrl+account);
+				const {data: res} = await this.$http.get(toUrl);
 				console.log(res);
 				this.Blogs=res;
+				this.blogNum=res.length;
 			},
 			goBack(){
 				//返回主页

@@ -32,9 +32,19 @@
 		name:'comment-module',
 		data(){
 			return{
+				inputComment:'',
 				props:{
 					comments:['']
 				}
+			}
+		},
+		methods:{
+			cancel(){
+				this.inputComment=''
+			},
+			//发表 
+			commitComment(){
+				
 			}
 		}
 	}

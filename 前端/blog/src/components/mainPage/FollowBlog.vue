@@ -1,8 +1,7 @@
 <template>
 	<div>
-		<blog-list 
-		v-bind:url="this.url">
-		</blog-list>
+		<blog-list
+		v-bind:url="this.url"></blog-list>
 	</div>
 </template>
 
@@ -10,7 +9,7 @@
 	import ViewList from "./blogView/viewlist.vue"
 	
 	export default{
-		name:"recommend",
+		name:"followBlog",
 		data(){
 			var account=window.sessionStorage.getItem('account');
 			return{

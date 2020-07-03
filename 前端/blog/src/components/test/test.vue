@@ -1,40 +1,38 @@
 <template>
-	<div class="">
-		<el-container>
-		  <el-header><el-page-header @back="goBack"></el-page-header></el-header>
-		  <el-container>
-		    <el-aside width="200px">
-				<el-card>
-					<div>
-						<el-avatar :src="pic"></el-avatar>
-						<el-button size="small" type="danger">关注</el-button>
-					</div>
-					<div>nobody</div>
-				</el-card>
-			</el-aside>
-		    <el-container>
-		      <el-main><el-card class="content">
-			  <div>Title</div>
-			  <el-divider></el-divider>
-			  <div>Content</div>
-			  </el-card>
-			  </el-main>
-		      <el-footer><!--评论区-->
-						<!--分页page-size每页10条-->
-						<el-pagination
-						  small
-						  :hide-on-single-page="true"
-						  layout="prev, pager, next"
-						  :page-size="10"
-						  :total="50">
-						</el-pagination></el-footer>
-		    </el-container>
-		  </el-container>
-		</el-container>
+	<div>
+	<el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
+	  点我打开
+	</el-button>
+	
+	<el-drawer
+	  title="我是标题"
+	  :visible.sync="drawer"
+	  :with-header="false">
+	  <span>我来啦!</span>
+	</el-drawer>
+		
 	</div>
 </template>
 
 <script>
+	export default{
+		data(){
+			return {
+				drawer:false,
+				direction:'ltr',
+			}
+		},
+		methods: {
+		      handleClose(done) {
+		        this.$confirm('确认关闭？')
+		          .then(_ => {
+					  this.drawer=false;
+		            done();
+		          })
+		          .catch(_ => {});
+		      }
+		}
+	}
 </script>
 
 <style>
