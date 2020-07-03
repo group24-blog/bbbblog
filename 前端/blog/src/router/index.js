@@ -9,7 +9,9 @@ import Blogs from "../components/mainPage/blogView/viewlist.vue"
 import Header from "../components/mainPage/header"
 import Edit	from "../components/mainPage/edit"
 import Recommend from "../components/mainPage/recommend"
-import Test from "../components/blogPage/blogDetail.vue"
+import Follow from "../components/mainPage/FollowBlog"
+import BlogDetail from "../components/blogPage/blogDetail"
+import Test from "../components/test/test.vue"
 
 Vue.use(Router)
 
@@ -35,6 +37,11 @@ export default new Router({
 		path:'/test',
 		component:Test
 	},
+	{
+		//博客详情
+		path:'/blog',
+		component:BlogDetail
+	},
     {
       path: '/home',
       name:Home,
@@ -56,7 +63,7 @@ export default new Router({
         },
         {
           path:'follow',
-          component:Blogs
+          component:Follow,
         },
 		{
 			path:'edit',
