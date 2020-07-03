@@ -2,13 +2,19 @@
     <div class="info_container" id="infoBgPic">
       <div class="info_box" >
 		  <!-- 数据区 -->
-		    <el-form   label-width="80px" class="info">
-		  		<h2>  *账号：  {{userForm.account}}</h2>
-		  		<h2>  *昵称：   {{userForm.name}}</h2>
-		  		<h2>  *性别：  {{userForm.sex}}</h2>
-		  		<h2>  *简介：  {{userForm.introduction}}</h2>
-		  		<h2>  *邮箱：  {{userForm.email}}</h2>
-		  </el-form>
+		    <div class="signForm">
+		  		<div class="fontStyle">账号：{{userForm.account}}</div>
+				
+		  		<div class="fontStyle">昵称：{{userForm.name}}<el-button type="primary" plain size="mini
+				" style="float: right;"  @click="changename" >修改</el-button></div>
+		  		<div  class="fontStyle">性别：{{userForm.sex}}</div>
+		  		<div  class="fontStyle">简介：{{userForm.introduction}}
+				<el-button type="primary" plain size="mini" style="float:right" 
+				@click="changeintr" >修改</el-button></div>
+		  		<div  class="fontStyle">邮箱：{{userForm.email}}
+				<el-button type="primary" plain size="mini" style="float:right"
+				 @click="changeemail" >修改</el-button></div>
+		  </div>
 		<!-- 头像区 -->
 			 <el-avatar :size="70" class = "userhead"  :src= "headphoto">
 			 </el-avatar>
@@ -22,66 +28,60 @@
 			</el-upload>
 
 			<el-form class="follow">
-				<el-button type="text"  >关注 </el-button>
+				<el-button type="text" @click="visibleFollowing=true">关注 </el-button>
 				<el-button type="text" >{{this.followedlist.length}}</el-button>
-
-
 			</el-form>
 			<el-form class="followed">
-				<el-button type="text" >粉丝</el-button>
+				<el-button type="text" @click="visibleFollower=true">粉丝</el-button>
 					<el-button type="text" >{{this.followlist.length}}</el-button>
 			</el-form>
-		<!-- 按钮区 -->
-		<el-form class="changebtn">
-
-			<el-form-item class="namebtn">
-				<el-button type="primary"  @click="changename" >修改</el-button>
-			</el-form-item>
-			<el-form-item class="intrbtn">
-				<el-button type="primary" @click="changeintr" >修改</el-button>
-			</el-form-item>
-			<el-form-item class="emailbtn">
-				<el-button type="primary" @click="changeemail" >修改</el-button>
-			</el-form-item>
-
-		</el-form>
-
-
-      </div>
-	  <!-- 粉丝 -->
-		 <div class="follow_box">
-			 <el-col :span="18" v-for="follow in followlist">
-			 	<el-card class="followCard" >
-
-						<el-avatar :size="50" :src="follow.photo" class="avatar" ></el-avatar>
-						<el-button type="primary" plain size="medium" round @click="changeuser(follow.account)">进他主页</el-button>
-
-						<div class="finfo">
-							<h4>{{'*账号*: '+follow.account}}</h4>
-							<h4>{{'*昵称*:'+follow.name}}</h4>
-							<h4>{{'*简介*:'+follow.introduction}}</h4>
-						</div>
-			 	</el-card>
-			 </el-col>
-		 </div>
-
-		 <!-- 关注 -->
-		 <div class="followed_box">
-		 			 <el-row :span="18" v-for="followed in followedlist">
-		 			 	<el-card class="followerCard">
-		 			 		 <el-avatar :size="50" :src="followed.photo" class="avatar" ></el-avatar>
-		 			 		 <el-button type="primary" plain size="medium" round @click="changeuser(followed.account)">进他主页</el-button>
-
-		 			 		 <div class="finfo">
-		 			 		 	<h4>{{'*账号*: '+followed.account}}</h4>
-		 			 		 	<h4>{{'*昵称*:'+followed.name}}</h4>
-		 			 		 	<h4>{{'*简介*:'+followed.introduction}}</h4>
-		 			 		 </div>
-		 			 	</el-card>
-		 			 </el-row>
-		 </div>
-
-
+		
+		</div>
+		
+		<el-drawer
+		  title="我的粉丝"
+		  :visible.sync="visibleFollower"
+		  :with-header="false"
+		  :append-to-body="true">
+		  <!-- 粉丝 -->
+		  		 <div class="follow_box">
+		  			 	<el-card class="followCard" v-bind:key="follow.account" v-for="follow in followlist">
+		  
+		  						<el-avatar :size="50" :src="follow.photo" class="avatar" ></el-avatar>
+		  						<el-button type="primary" style="float: right;" plain size="small" round @click="changeuser(follow.account)">进他主页</el-button>
+		  
+		  						<div class="finfo">
+		  							 	<span style="margin: 10px;">{{'账号: '+follow.account}}</span>
+		  								<span style="margin: 10px;">{{'昵称:'+follow.name}}</span>
+		  							 	 <div style="margin: 10px;">{{'简介:'+follow.introduction}}</div>
+		  						</div>
+		  			 	</el-card>
+		  		 </div>
+		</el-drawer>
+		
+		
+		<el-drawer
+		  title="我的关注"
+		  :visible.sync="visibleFollowing"
+		  :with-header="false"
+		  :append-to-body="true">
+		  <!-- 关注 -->
+		  <div class="followed_box">
+		  		<el-card class="followerCard" v-bind:key="followed.account" v-for="followed in followedlist">
+		   		 <el-avatar :size="50" :src="followed.photo" class="avatar" ></el-avatar>
+		   		 <el-button type="primary" plain size="small" round 
+				 @click="changeuser(followed.account)"
+				 style="float: right;">进他主页</el-button>
+		
+  		 		 <div class="finfo">
+  			 		 	<span style="margin: 10px;">{{'账号: '+followed.account}}</span>
+						<span style="margin: 10px;">{{'昵称:'+followed.name}}</span>
+		  			 	 <div style="margin: 10px;">{{'简介:'+followed.introduction}}</div>
+		  		</div>
+		  			 	</el-card>
+		  </div>
+		  
+		</el-drawer>
     </div>
 </template>
 
@@ -110,6 +110,8 @@
 			account: window.sessionStorage.getItem('account')
 		},
 		headphoto:'',
+		visibleFollower:false,
+		visibleFollowing:false,
       }
     },
 	created(){
@@ -244,6 +246,15 @@
 .info_container{
   height: 100%;
   width: auto;
+}
+.signForm{
+	width: 90%;
+	padding-left: 20px;
+	margin-top: 30%;
+	.fontStyle{
+		margin: 20px;
+		font-size: 20px;
+	}
 }
   .info_box{
     width: 500px;
