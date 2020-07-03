@@ -10,7 +10,7 @@
 		  		<h2>  *邮箱：  {{userForm.email}}</h2>
 		  </el-form>
 		<!-- 头像区 -->
-			 <el-avatar :size="70" class = "userhead"  src="http://07prjk91rd.52http.com/images/1593700860184.png">
+			 <el-avatar :size="70" class = "userhead"  :src= "headphoto">
 			 </el-avatar>
 
 			<el-upload
@@ -18,15 +18,18 @@
 			  action="http://07prjk91rd.52http.com/user/upload"
 			  :data= "upaccount"
 			  >
-			  <el-button  type="test">上传</el-button>
+			  <el-button  type="test" size="small">上传</el-button>
 			</el-upload>
 
-			</el-form>
 			<el-form class="follow">
-				<el-button type="text" @click="showfollow = true">关注</el-button>
+				<el-button type="text"  >关注 </el-button>
+				<el-button type="text" >{{this.followedlist.length}}</el-button>
+
+
 			</el-form>
 			<el-form class="followed">
-				<el-button type="text" @click="showfans = true">粉丝</el-button>
+				<el-button type="text" >粉丝</el-button>
+					<el-button type="text" >{{this.followlist.length}}</el-button>
 			</el-form>
 		<!-- 按钮区 -->
 		<el-form class="changebtn">
@@ -43,22 +46,48 @@
 
 		</el-form>
 
-		<el-drawer
-		  title="关注列表"
-		  :visible.sync="showfollow"
-		  direction="rtl"
-		  size="50%">
-		   <el-table :data="showfollow">
 
-		    </el-table>
-		</el-drawer>
       </div>
+	  <!-- 粉丝 -->
+		 <div class="follow_box">
+			 <el-col :span="18" v-for="follow in followlist">
+			 	<el-card class="followCard" >
+
+						<el-avatar :size="50" :src="follow.photo" class="avatar" ></el-avatar>
+						<el-button type="primary" plain size="medium" round @click="changeuser(follow.account)">进他主页</el-button>
+
+						<div class="finfo">
+							<h4>{{'*账号*: '+follow.account}}</h4>
+							<h4>{{'*昵称*:'+follow.name}}</h4>
+							<h4>{{'*简介*:'+follow.introduction}}</h4>
+						</div>
+			 	</el-card>
+			 </el-col>
+		 </div>
+
+		 <!-- 关注 -->
+		 <div class="followed_box">
+		 			 <el-row :span="18" v-for="followed in followedlist">
+		 			 	<el-card class="followerCard">
+		 			 		 <el-avatar :size="50" :src="followed.photo" class="avatar" ></el-avatar>
+		 			 		 <el-button type="primary" plain size="medium" round @click="changeuser(followed.account)">进他主页</el-button>
+
+		 			 		 <div class="finfo">
+		 			 		 	<h4>{{'*账号*: '+followed.account}}</h4>
+		 			 		 	<h4>{{'*昵称*:'+followed.name}}</h4>
+		 			 		 	<h4>{{'*简介*:'+followed.introduction}}</h4>
+		 			 		 </div>
+		 			 	</el-card>
+		 			 </el-row>
+		 </div>
+
+
     </div>
 </template>
 
 <script>
   export default {
-
+	inject:['reload'],
     data () {
       return {
         userForm: {
@@ -74,14 +103,19 @@
           comments:[],
           friends:[],
         },
+
+			followlist:Array,
+			followedlist:Array,
 		upaccount:{
 			account: window.sessionStorage.getItem('account')
 		},
-		headphoto:''
+		headphoto:'',
       }
     },
 	created(){
 		this.getUserInfo()
+		this.getFollow()
+		this.getFollowed()
 	},
     methods:{
      async getUserInfo(){
@@ -96,8 +130,19 @@
 				this.userForm.time = res.time
 				this.userForm.password = res.password
 				this.headphoto = res.photo
-				console.log(this.headphoto)
 			},
+	async getFollow(){
+
+				    const {data: res} = await this.$http.get('http://07prjk91rd.52http.com/user/friends/'+ window.sessionStorage.getItem('account'))
+					this.followlist = res
+					console.log(res)
+				},
+	async getFollowed(){
+
+				    const {data: res} = await this.$http.get('http://07prjk91rd.52http.com/user/subscribe/'+ window.sessionStorage.getItem('account'))
+					this.followedlist = res
+					console.log(res)
+				},
 			changeemail (){
 				 this.$prompt('请输入邮箱', '提示', {
 				          confirmButtonText: '确定',
@@ -177,6 +222,11 @@
 				          });
 						 })
 			},
+			changeuser: function(foaccount){
+				sessionStorage.setItem('account',foaccount)
+				console.log(foaccount)
+				this.reload()
+			},
 
 	  }
   }
@@ -245,7 +295,7 @@
 	}
 	.upload{
 		position:absolute;
-		left:40%;
+		left:42%;
 		top:25%;
 	}
 	.follow{
@@ -259,6 +309,12 @@
 		  left: 60%;
 	}
 
+}
+
+  .followbox{
+  	position: absolute;
+  	top: 15%;
+  	left: 10%;
   }
 
 </style>
