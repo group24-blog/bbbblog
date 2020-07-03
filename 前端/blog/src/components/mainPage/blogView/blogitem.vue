@@ -2,7 +2,7 @@
 	<div class="blogItem">
 		<el-row>
 			<el-col :span="3">
-				<el-avatar :size="50" :src="this.avatarSrc" @click="toAuthor"></el-avatar>
+				<el-avatar :size="50" :src="this.avatarSrc"></el-avatar>
 				<div class="author">{{this.author}}</div>
 			</el-col>
 			<el-col :span="18">

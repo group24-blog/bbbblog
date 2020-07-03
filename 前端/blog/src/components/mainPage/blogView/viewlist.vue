@@ -6,7 +6,8 @@
 		:avatarSrc="blog.avatarSrc"
 		:blogContent="blog.articleContent"
 		:author="blog.articleUserAccount"
-		:time="blog.articleTime">
+		:time="blog.articleTime"
+		@click.native="gotoDetail(blog.articleId)">
 		</BlogItem>
 		 <el-divider v-else>这里还什么都没有哦</el-divider>
 	</div>
@@ -51,6 +52,15 @@
 			goBack(){
 				//返回主页
 				this.$router.push('/home')
+			},
+			//打开博客详情
+			gotoDetail(id){
+				console.log("click");
+				let {href}= this.$router.resolve({
+				   path: "/blog",   // 这里写的是要跳转的路由地址
+				   query: {blogId:id}  // 这里写的是页面参数
+				});
+				window.open(href, '_blank');
 			},
 			//分段处理后端传来的信息
 			sliceArray(array){

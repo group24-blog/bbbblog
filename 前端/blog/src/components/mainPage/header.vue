@@ -9,7 +9,7 @@
       <el-menu-item index="/home/follow">关注内容</el-menu-item>
       <el-menu-item>
         <el-input class="inputBox" size="small"
-                  prefix-icon="el-icon-search" v-model="searchContent">
+                  prefix-icon="el-icon-search" @input="search" v-model="searchContent">
           <el-button slot="append" type="primary" class="button" @click="search">搜索</el-button>
         </el-input>
       </el-menu-item>
@@ -45,7 +45,9 @@
       },
       search(){
         //搜索
-
+			var content=this.searchContent;
+			console.log(content);
+			this.$router.push({path:'/home/search',query:{content:content}})
       }
 
     },
