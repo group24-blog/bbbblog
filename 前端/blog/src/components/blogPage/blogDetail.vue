@@ -29,7 +29,8 @@
 					<!--评论区-->
 					<!--分页page-size每页10条-->
 					<comment-module style="width: 100%;height: auto;"
-					:comments="Comments">
+					:comments="Comments"
+					:blogId="this.Id">
 					</comment-module>
 				</el-footer>
 			</el-container>
@@ -43,10 +44,10 @@
 		name: 'blogDetail',
 		data() {
 			return {
-				Id: 0,
+				Id: 2,
 				Url: 'http://07prjk91rd.52http.com/blog/detail/',
 				Blog: {},
-				Comments: {},
+				Comments:[],
 				Author: {},
 				blogNum:0,
 				FollowButtonContent:'关注'
@@ -65,7 +66,8 @@
 				this.$http.push('/home')
 			},
 			async getBlog() {
-				var id = this.$route.query.blogId;
+				this.Id =Number (this.$route.query.blogId);
+				var id=this.Id;
 				var url=this.Url;
 				console.log(this.Id);
 				const {
@@ -74,7 +76,9 @@
 				console.log(res);
 				this.Blog = res;
 				this.Author=res.atticleUser;
-				this.blogNum=this.Author.blogs.length;
+				this.blogNum=res.blogNum;
+				this.Comments=res.briefCommentList;
+				consle.log(this.Comments);
 			},
 			//关注博主
 			follow(){

@@ -12,6 +12,7 @@ import Recommend from "../components/mainPage/recommend"
 import Follow from "../components/mainPage/FollowBlog"
 import BlogDetail from "../components/blogPage/blogDetail"
 import Test from "../components/test/test.vue"
+import Search from "../components/mainPage/Search"
 
 Vue.use(Router)
 
@@ -68,6 +69,10 @@ export default new Router({
 		{
 			path:'edit',
 			component:Edit
+		},
+		{
+			path:'search',
+			component:Search
 		}],
     },
   ]

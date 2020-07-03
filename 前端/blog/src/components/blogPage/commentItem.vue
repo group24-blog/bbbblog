@@ -1,18 +1,19 @@
 <!--评论模块-->
 <template>
 	 <div class="commentBox">
+		 <el-divider></el-divider>
 	   <div class="info">
-	     <img class="avatar" :src="this.photo" width="36" height="36"/>
+	     <el-avatar class="avatar" style="float: left;" :src="this.photo" size="30"></el-avatar>
 	     <div class="right">
 	       <div class="name">{{this.userName}}</div>
 	       <div class="date">{{this.time}}</div>
 	     </div>
 	   </div>
-	   <div class="content">{{this.content}}</div>
+	   <el-row><div class="content">{{this.content}}</div></el-row>
 	   <div class="control">
 	     <span class="comment-reply" @click="showCommentInput(item)">
 	       <i class="iconfont icon-comment"></i>
-	       <span>回复</span>
+	       <span class="button">回复</span>
 	     </span>
 	   </div>
 	  </div>
@@ -36,6 +37,7 @@
 		  userName:String,
 		  replyName:String,
 		  commentId:Number,
+			
 	  },
 	  methods:{
 		  showCommentInput(item){
@@ -46,5 +48,26 @@
 </script>
 
 <style>
-
+	 .commentBox{
+		 width: 100%;
+		 margin: 5px;
+	 }
+	 .right{
+		 float: left;
+		 text-align: left;
+		 margin-left: 15px;
+	 }
+	 .name{
+		 color: black;
+		 font-size: 16px;
+	 }
+	 .date{
+		 color: #999999;
+		 font-size: 12px;
+	 }
+	 .button{
+		 color: #777777;
+		 font-size: 14px;
+		 float: right;
+	 }
 </style>

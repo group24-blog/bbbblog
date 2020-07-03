@@ -16,17 +16,15 @@
 		</div>
 		<!--分页-->
 		<div style="width: auto;text-align: center;margin-top: 5%;">
-			<el-pagination class="pagination"
-				small
-				:hide-on-single-page="true"
-				layout="prev, pager, next"
-				:page-size="10"
-				:total="11">
-				<comment-item v-bind:key=comment.commentId v-for="comment in comments">
-					
+				<comment-item v-bind:key="comment.commentId" v-for="comment in comments"
+				:content="comment.commentContent"
+				:photo="comment.avatar"
+				:time="comment.commentTime"
+				:userName="comment.userName"
+				:replyName="comment.replyName"
+				:commentId="comment.commentId">
 				</comment-item>
 				<el-divider>·以上就是全部回复了</el-divider>
-			</el-pagination>
 		</div>
 	</div>
 </template>
@@ -44,6 +42,9 @@
 		props:{
 			comments:Array,
 			blogId:Number,
+		},
+		created:function(){
+			console.log(comments)
 		},
 		methods:{
 			cancel(){
