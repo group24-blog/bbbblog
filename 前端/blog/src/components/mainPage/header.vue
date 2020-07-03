@@ -14,6 +14,9 @@
         </el-input>
       </el-menu-item>
       <el-menu-item index="/home/edit">发表博客</el-menu-item>
+	   <el-menu-item >
+		   <el-button @click="loginOrExit">{{this.iflogin}}</el-button>
+	   </el-menu-item>
     </el-menu>
     <!--变化的部分-->
   </div>
@@ -36,9 +39,17 @@
         searchContent:'',
         panel:"Blogs",
         homeUrl:this.$route.path+"/recommend",
-
+				iflogin:'登录'
       }
     },
+	created() {
+		if(window.sessionStorage.getItem('iflogin') === 'true'){
+			this.iflogin = '退出'
+		}
+		else{
+			this.iflogin = '登录'
+		}
+	},
     methods:{
       showInfo(){
         this.$router.push('/info')
@@ -46,8 +57,11 @@
       search(){
         //搜索
 
-      }
-
+      },
+			loginOrExit(){
+					this.$router.push('/login')
+					window.sessionStorage.setItem('iflogin','false')
+			}
     },
     components:{
       Blogs,

@@ -2,14 +2,13 @@
 	<!--发表博客的页面-->
 	<div class="edit">
 		<!--标题栏-->
-		<el-form :model="briefblog">
-		<div class="titleBox">
-
-		  <el-input placeholder="请输入博客标题" v-model="briefblog.articleTitle">
+		<el-form :model="briefblog" :rules="editRules" ref="editRef">
+		<el-form-item class="titleBox" prop="articleTitle">
+		  <el-input placeholder="请输入博客标题" v-model="briefblog.articleTitle" >
 		    <template slot="prepend">标题</template>
 		  </el-input>
-		</div>
-		<div>
+		</el-form-item>
+		<el-form-item  prop="articleContent">
 			<el-input class="editBox"
 			  type="textarea"
 			  :rows="20"
@@ -17,7 +16,7 @@
 			  v-model="briefblog.articleContent">
 			</el-input>
 			<el-button  type="primary" style="float:right;margin-top: 10px;" @click = "sendBlog">发表</el-button>
-		</div>
+		</el-form-item>
 		</el-form>
 	</div>
 </template>
@@ -30,20 +29,26 @@
 					articleTitle:'',
 					articleUserAccount: window.sessionStorage.getItem('account'),
 					articleContent:''
-				}
+				},
+				editRules:{
+					articleTitle: [ { required: true, message: '请输入文章标题', trigger: 'blur' }],
+					articleContent: [{ required: true, message: '请输入文章内容', trigger: 'blur' }]
+				},
 			}
 		},
 		methods:{
-			async sendBlog(){
-				console.log(this.briefblog)
-				const {data: res} = await this.$http.post('http://07prjk91rd.52http.com/blog/publish',this.briefblog)
-				if(res === true){
-					this.$message.success('发表成功！')
-					this.$router.push('myblog')
-					}
-					else{
-						this.$message.error('发表失败！')
-					}
+			
+			sendBlog(){
+				this.$refs.editRef.validate(async (valid) => {
+					 if (!valid) return 0
+				  const {data: res} = await this.$http.post('http://07prjk91rd.52http.com/blog/publish',this.briefblog)
+				  if(res === true){
+				  	this.$message.success('发表成功！')
+				  	}
+				  	else{
+				  		this.$message.error('发表失败！')
+				  	}
+				})
 			}
 
 		}

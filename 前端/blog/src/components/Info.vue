@@ -113,12 +113,14 @@
       }
     },
 	created(){
+		
 		this.getUserInfo()
 		this.getFollow()
-		this.getFollowed()
+		this.getFollowed()	
+		
 	},
     methods:{
-     async getUserInfo(){
+    async getUserInfo(){
 
 			    const {data: res} = await this.$http.get('http://07prjk91rd.52http.com/user/get/'+ window.sessionStorage.getItem('account'))
 				this.userForm.account = res.account
